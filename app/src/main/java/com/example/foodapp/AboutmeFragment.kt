@@ -1,59 +1,105 @@
 package com.example.foodapp
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import androidx.fragment.app.Fragment
+import com.example.foodapp.databinding.FragmentAboutmeBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [AboutmeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AboutmeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentAboutmeBinding? = null
+    private val binding get() = _binding!!
+
+    private lateinit var sharedPreferences: SharedPreferences
+    private val sharedPreferencesKey = "ABOUT_ME_DETAILS"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_aboutme, container, false)
+    ): View {
+        _binding = FragmentAboutmeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AboutmeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AboutmeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        sharedPreferences = requireContext().getSharedPreferences(
+            "AboutMePrefs",
+            Context.MODE_PRIVATE
+        )
+
+        // Load saved details
+        loadDetails()
+
+        binding.fabAddDetails.setOnClickListener {
+            showEditDialog()
+        }
+    }
+
+    private fun showEditDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.edit_aboutme, null)
+
+        val editTextName = dialogView.findViewById<EditText>(R.id.editTextName)
+        val editTextFavoriteRecipes = dialogView.findViewById<EditText>(R.id.editTextFavoriteRecipes)
+        val editTextFoodPhilosophy = dialogView.findViewById<EditText>(R.id.editTextFoodPhilosophy)
+
+        // Set existing values
+        editTextName.setText(binding.textName.text)
+        editTextFavoriteRecipes.setText(binding.textFavoriteRecipes.text)
+        editTextFoodPhilosophy.setText(binding.textFoodPhilosophy.text)
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Edit Details")
+            .setView(dialogView)
+            .setPositiveButton("Save") { dialog, _ ->
+
+                binding.textName.text = editTextName.text.toString()
+                binding.textFavoriteRecipes.text = editTextFavoriteRecipes.text.toString()
+                binding.textFoodPhilosophy.text = editTextFoodPhilosophy.text.toString()
+
+                saveDetails()
+
+                dialog.dismiss()
             }
+            .setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    private fun saveDetails() {
+        val editor = sharedPreferences.edit()
+        editor.putString("name", binding.textName.text.toString())
+        editor.putString("favoriteRecipes", binding.textFavoriteRecipes.text.toString())
+        editor.putString("foodPhilosophy", binding.textFoodPhilosophy.text.toString())
+        editor.apply()
+    }
+
+    private fun loadDetails() {
+        val name = sharedPreferences.getString("name", "Abdel")
+        val favoriteRecipes = sharedPreferences.getString(
+            "favoriteRecipes",
+            "Favorite Recipes: Indulging in the aromatic delights of dishes like Tagine, Couscous with Seven Vegetables, and Bastilla, each bite a celebration of Morocco's culinary artistry."
+        )
+        val foodPhilosophy = sharedPreferences.getString(
+            "foodPhilosophy",
+            "Food Philosophy: Embracing the harmony of sweet and savory, the use of aromatic spices, and the importance of communal dining. In Morocco, food is not just sustenance; it's a vibrant expression of culture, hospitality, and the joy of sharing a meal with loved ones."
+        )
+
+        binding.textName.text = name
+        binding.textFavoriteRecipes.text = favoriteRecipes
+        binding.textFoodPhilosophy.text = foodPhilosophy
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

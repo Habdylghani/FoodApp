@@ -3,9 +3,9 @@ package com.example.foodapp
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import java.util.ArrayList
 
 class MyRecViewAdapter (var recipelist: ArrayList<Recipe>):
@@ -22,6 +22,9 @@ class MyRecViewAdapter (var recipelist: ArrayList<Recipe>):
     override fun onBindViewHolder(holder: MyRecViewAdapter.MyViewHolder, position: Int) {
         holder.text_name.text = recipelist[position].name
         holder.text_auth.text = recipelist[position].desc
+        holder.imageView.setImageResource(recipelist[position].imageResourceId)
+
+
 
     }
 
@@ -29,12 +32,12 @@ class MyRecViewAdapter (var recipelist: ArrayList<Recipe>):
         return recipelist.size
     }
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        var text_name: TextView
-        var text_auth:TextView
-        init{
-            text_name = itemView.findViewById(R.id.name) as TextView
-            text_auth = itemView.findViewById(R.id.desc) as TextView
-        }
+            val imageView: ImageView = itemView.findViewById(R.id.imageView)
+            var text_name = itemView.findViewById(R.id.name) as TextView
+            var text_auth = itemView.findViewById(R.id.desc) as TextView
+
+
+
 
     }
 }
