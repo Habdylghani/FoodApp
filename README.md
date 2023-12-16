@@ -25,8 +25,9 @@ Welcome to My Food App, your ultimate culinary companion! This Android app, deve
 - **Key Concepts:** Fragments, RecyclerView, Shared Preferences, FloatingActionButton, Menu
 
 ## Screenshots
-username: user
-password: password
+-username: user
+-password: password
+-
 ![Screenshot](Screenshot.png)
 
 <!-- Add more screenshots or images as needed -->
