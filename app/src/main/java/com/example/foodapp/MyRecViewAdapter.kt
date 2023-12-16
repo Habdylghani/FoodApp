@@ -8,15 +8,18 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import java.util.ArrayList
 
-class MyRecViewAdapter (var recipelist: ArrayList<Recipe>):
-    RecyclerView.Adapter<MyRecViewAdapter.MyViewHolder>() {
+class MyRecViewAdapter(
+    var recipelist: ArrayList<Recipe>,
+    private val onItemClick: (Recipe) -> Unit
+) : RecyclerView.Adapter<MyRecViewAdapter.MyViewHolder>() {
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): MyRecViewAdapter.MyViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_recipes,parent,false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_recipes, parent, false)
         return MyViewHolder(view)
-
     }
 
     override fun onBindViewHolder(holder: MyRecViewAdapter.MyViewHolder, position: Int) {
@@ -24,20 +27,18 @@ class MyRecViewAdapter (var recipelist: ArrayList<Recipe>):
         holder.text_auth.text = recipelist[position].desc
         holder.imageView.setImageResource(recipelist[position].imageResourceId)
 
-
-
+        holder.itemView.setOnClickListener {
+            onItemClick(recipelist[position])
+        }
     }
 
     override fun getItemCount(): Int {
         return recipelist.size
     }
-    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-            val imageView: ImageView = itemView.findViewById(R.id.imageView)
-            var text_name = itemView.findViewById(R.id.name) as TextView
-            var text_auth = itemView.findViewById(R.id.desc) as TextView
 
-
-
-
+    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val imageView: ImageView = itemView.findViewById(R.id.imageView)
+        var text_name = itemView.findViewById(R.id.name) as TextView
+        var text_auth = itemView.findViewById(R.id.desc) as TextView
     }
 }

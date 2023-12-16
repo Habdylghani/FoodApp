@@ -1,13 +1,11 @@
 package com.example.foodapp
 
 import android.os.Bundle
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.foodapp.databinding.AddBlogBinding
-
 
 class AddBlogPostDialogFragment : DialogFragment() {
 
@@ -23,7 +21,6 @@ class AddBlogPostDialogFragment : DialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = AddBlogBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -40,13 +37,10 @@ class AddBlogPostDialogFragment : DialogFragment() {
                 val timestamp = System.currentTimeMillis()
                 val blogPost = BlogPost(title, content, author, timestamp)
 
-
                 addBlogPostListener?.onBlogPostAdded(blogPost)
-
-
                 dismiss()
             } else {
-
+                // Handle the case when the input fields are not filled
             }
         }
     }

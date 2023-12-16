@@ -6,54 +6,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:layout_margin="16dp"
     tools:context=".AboutmeFragment">
 
-    <TextView
-        android:id="@+id/textName"
-        android:layout_width="356dp"
-        android:layout_height="50dp"
-        android:layout_margin="16dp"
-        android:text="Abdel"
-        android:background="@drawable/border"
-    app:layout_constraintEnd_toEndOf="@+id/textFavoriteRecipes"
-    app:layout_constraintStart_toStartOf="@+id/textFavoriteRecipes"
-    app:layout_constraintTop_toTopOf="parent" />
+<TextView
+android:id="@+id/textName"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Abdel"
+android:background="@android:color/transparent"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintTop_toTopOf="parent"
+app:layout_constraintBottom_toTopOf="@+id/textFavoriteRecipes" />
 
-    <TextView
-        android:id="@+id/textFavoriteRecipes"
-        android:layout_width="311dp"
-        android:layout_height="156dp"
-        android:layout_margin="16dp"
-        android:text="Favorite Recipes: Your Favorite Recipes Here"
-        android:background="@drawable/border"
-    app:layout_constraintBottom_toTopOf="@+id/textFoodPhilosophy"
-    app:layout_constraintEnd_toEndOf="@+id/textFoodPhilosophy"
-    app:layout_constraintStart_toStartOf="@+id/textFoodPhilosophy"
-    app:layout_constraintTop_toBottomOf="@+id/textName" />
+<TextView
+android:id="@+id/textFavoriteRecipes"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Favorite Recipes: Your Favorite Recipes Here"
+android:background="@android:color/transparent"
+app:layout_constraintTop_toBottomOf="@+id/textName"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintBottom_toTopOf="@+id/textFoodPhilosophy" />
 
-    <TextView
-        android:id="@+id/textFoodPhilosophy"
-        android:layout_width="320dp"
-        android:layout_height="157dp"
-        android:layout_margin="16dp"
-        android:layout_marginBottom="100dp"
-        android:text="Food Philosophy: Your Food Philosophy Here"
-        android:background="@drawable/border"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/textName" />
+<TextView
+android:id="@+id/textFoodPhilosophy"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Food Philosophy: Your Food Philosophy Here"
+android:background="@android:color/transparent"
+app:layout_constraintTop_toBottomOf="@+id/textFavoriteRecipes"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintBottom_toBottomOf="parent" />
 
-    <!-- Existing FloatingActionButton -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAddDetails"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:backgroundTint="@color/teal_200"
-        android:src="@android:drawable/ic_input_add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+<com.google.android.material.floatingactionbutton.FloatingActionButton
+android:id="@+id/fabAddDetails"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="bottom|end"
+android:backgroundTint="@color/teal_200"
+android:src="@android:drawable/ic_input_add"
+app:layout_constraintBottom_toBottomOf="parent"
+app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

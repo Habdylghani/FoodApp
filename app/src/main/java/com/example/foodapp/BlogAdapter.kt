@@ -6,26 +6,35 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class BlogAdapter(private val blogList: List<BlogPost>) :
-    RecyclerView.Adapter<BlogAdapter.ViewHolder>() {
+class BlogAdapter(
+    private val blogList: MutableList<BlogPost>,
+    private val onItemClick: (BlogPost) -> Unit
+) : RecyclerView.Adapter<BlogAdapter.ViewHolder>() {
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val titleTextView: TextView = itemView.findViewById(R.id.titleTextView)
         val contentTextView: TextView = itemView.findViewById(R.id.contentTextView)
-        val authorTextView: TextView = itemView.findViewById(R.id.authorTextView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_blog_post, parent, false)
-        return ViewHolder(itemView)
+        val itemView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_blog_post, parent, false)
+        val viewHolder = ViewHolder(itemView)
+
+        itemView.setOnClickListener {
+            val position = viewHolder.adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                onItemClick(blogList[position])
+            }
+        }
+
+        return viewHolder
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val currentBlogPost = blogList[position]
-
-        holder.titleTextView.text = currentBlogPost.title
-        holder.contentTextView.text = currentBlogPost.content
-        holder.authorTextView.text = currentBlogPost.author
+        val blogPost = blogList[position]
+        holder.titleTextView.text = blogPost.title
+        holder.contentTextView.text = blogPost.content
     }
 
     override fun getItemCount(): Int {

@@ -7,21 +7,24 @@
 
     <TextView
         android:id="@+id/dayOfWeekTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:text="Day of Week"
         android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/mealNameTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:text="Meal Name"/>
 
     <TextView
         android:id="@+id/mealTypeTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:text="Meal Type"/>
 
 </LinearLayout>
