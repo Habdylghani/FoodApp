@@ -26,7 +26,7 @@ Welcome to My Food App, your ultimate culinary companion! This Android app, deve
 
 ## Screenshots
 
-![Screenshot](path/to/your/screenshot.png)
+![Screenshot](Screenshot.png)
 
 <!-- Add more screenshots or images as needed -->
 
